@@ -4,9 +4,9 @@ var authCtrl = require('../controllers/auth')
 
 /* GET home page. */
 
-router.post('/swap-token', projectsCtrl.swapToken);
+router.post('/swap-token', authCtrl.swapToken);
 
-router.post('/refresh-token', projectsCtrl.refreshToken);
+router.post('/refresh-token', authCtrl.refreshToken);
 // router.get('/', function(req, res, next) {
 //   res.render('index', { title: 'Express' });
 // });
