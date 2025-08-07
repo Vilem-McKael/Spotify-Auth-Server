@@ -40,7 +40,7 @@ async function refreshToken(req, res) {
     const refresh_token = req.body.refresh_token;
 
     try {
-        params = URLSearchParams({
+        const params = new URLSearchParams({
             grant_type: 'refresh_token',
             refresh_token: refresh_token
         })

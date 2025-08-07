@@ -7,8 +7,5 @@ var authCtrl = require('../controllers/auth')
 router.post('/swap-token', authCtrl.swapToken);
 
 router.post('/refresh-token', authCtrl.refreshToken);
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
 
 module.exports = router;
