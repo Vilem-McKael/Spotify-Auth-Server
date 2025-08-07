@@ -8,9 +8,9 @@ var cors = require('cors');
 
 require('dotenv').config();
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-const { URLSearchParams } = require('url');
+// var indexRouter = require('./routes/index');
+// var usersRouter = require('./routes/users');
+// const { URLSearchParams } = require('url');
 
 var app = express();
 app.use(cors())
@@ -26,51 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', indexRouter);
-app.use('/spotify', require('./routes/auth'))
-
-app.get('/refresh', async (request, response) => {
-  const code = request.query['code']
-  await axios
-  .post(
-    (url = 'https://accounts.spotify.com/api/token'),
-    (data = new URLSearchParams({
-      grant_type: 'authorization_code',
-      redirect_uri: process.env.REDIRECT_URI,
-      code: code,
-    })),
-    (config = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      params: {
-        grant_type: 'client-credentials',
-      },
-      auth: {
-        username: process.env.CLIENT_ID,
-        password: process.env.CLIENT_SECRET,
-      },
-    })
-  ).then(resp1 => {
-    axios
-    .post(
-      (url = 'https://accounts.spotify.com/api/token'),
-      (data = new URLSearchParams({
-        grant_type: 'refresh_token',
-        refresh_token: resp1.data.refresh_token,
-        access_token: resp1.data.access_token,
-      })),
-      (config = {
-        auth: {
-          username: process.env.CLIENT_ID,
-          password: process.env.CLIENT_SECRET,
-        },
-      })
-    )
-    .then(resp2 => {
-      return this.response.send(JSON.stringify([resp1.data, resp2.data]))
-    })
-  })
-})
+app.use('/auth', require('./routes/auth'))
 
 // app.use('/users', usersRouter);
 
