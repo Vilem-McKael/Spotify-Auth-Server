@@ -38,6 +38,8 @@ async function swapToken(req, res) {
     const code = req.body.code;
     const code_verifier = req.body.code_verifier; // SDK sends this automatically
 
+    console.log('swap body:', req.body);
+
     try {
         const params = new URLSearchParams({
             grant_type: 'authorization_code',
