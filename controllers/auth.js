@@ -8,6 +8,10 @@ module.exports = {
 async function swapToken(req, res) {
     const code = req.body.code;
 
+    console.log('CLIENT_ID:', process.env.CLIENT_ID);
+    console.log('CLIENT_SECRET length:', process.env.CLIENT_SECRET?.length);
+    console.log('REDIRECT_URI:', process.env.REDIRECT_URI);
+
     const authHeader = Buffer.from(`${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`).toString('base64')
 
     try {
@@ -38,6 +42,10 @@ async function swapToken(req, res) {
 
 async function refreshToken(req, res) {
     const refresh_token = req.body.refresh_token;
+
+    console.log('CLIENT_ID:', process.env.CLIENT_ID);
+    console.log('CLIENT_SECRET length:', process.env.CLIENT_SECRET?.length);
+    console.log('REDIRECT_URI:', process.env.REDIRECT_URI);
 
     const authHeader = Buffer.from(`${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`).toString('base64')
 
